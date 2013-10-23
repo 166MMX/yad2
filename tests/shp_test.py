@@ -1,12 +1,8 @@
 import unittest
-from mock import Mock, MagicMock
-from yad2 import Shp
+from yad2.formats import Shp
 from base64 import b64decode, b64encode
 
 class ShpHeaderTest(unittest.TestCase):
-
-    def test1(self):
-        self.assertTrue(True)
 
     def chunk_header_test(self):
         header = Shp.Chunk.Header(b64decode("AAAQEAAQZQBuAA=="))
@@ -15,4 +11,4 @@ class ShpHeaderTest(unittest.TestCase):
         self.assertEqual(header.height, 16)
         
     def chunk_data_test(self):
-        
+        pass

@@ -32,7 +32,7 @@ Obtain a copy of _Dune2.exe_ (apparently it was never officialy freed, so I'm no
 
 Launch simplistic game window / engine
 ```
-./run.py --config config.ini
+./yad2.py --config config.ini
 ```
 
 #### Extractors (aka Dune 2 file converters)
