@@ -1,13 +1,17 @@
 ## yad2 (Yet Another Dune 2)
 
-The goal here is to play with python, and specifically proper testing in python. I'm (probably) not going to implement anything complete, like a working game engine. Most likely it will end up being just a bunch of PAK file extractors and such. 
+If you never heard about classic Westwood RTS Dune 2, see overly detailed description at http://dune.wikia.com/wiki/Dune_II_(video_game).
 
-For a real Dune 2 experience (more or less true to the original) see them projects
+The initial goal here was to play with python - proper testing, good practices, structuring codebase, etc. I'm (probably) not going to implement anything complete, like a working game engine. Most likely it will end up being just a bunch of PAK file extractors and such. 
+
+For a complete Dune 2 experience (more or less true to the original) see them projects
 * OpenDUNE, C, https://github.com/OpenDUNE/OpenDUNE
 * OpenRA, C#, https://github.com/OpenRA/OpenRA
 * Dune 2 The Maker, Java/C++, https://github.com/stefanhendriks/Dune-II---The-Maker
 * Dune Legacy, C++, http://sourceforge.net/apps/mediawiki/dunelegacy/
 * Dune Dynasty, C, http://dunedynasty.sourceforge.net/
+
+or just use the original 1992 binary with DOSBox http://www.dosbox.com/wiki/GAMES:Dune_2
 
 ### Usage
 
