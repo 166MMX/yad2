@@ -2,14 +2,16 @@
 
 The goal here is to play with python, and specifically proper testing in python. I'm (probably) not going to implement anything complete, like a working game engine. Most likely it will end up being just a bunch of PAK file extractors and such. 
 
-For a real Dune 2 experience (more or *less* true to the original, and/or abandoned) see them projects
-* Dune Legacy, C++, http://sourceforge.net/projects/dunelegacy/develop
+For a real Dune 2 experience (more or less true to the original) see them projects
 * OpenDUNE, C, https://github.com/OpenDUNE/OpenDUNE
-* Dune Dynasty, C, http://sourceforge.net/p/dunedynasty/dunedynasty/ci/master/tree/
-* OpenRA, https://github.com/OpenRA/OpenRA
-* Dune 2 The Maker, http://dune2themaker.fundynamic.com/
+* OpenRA, C#, https://github.com/OpenRA/OpenRA
+* Dune 2 The Maker, Java/C++, https://github.com/stefanhendriks/Dune-II---The-Maker
+* Dune Legacy, C++, http://sourceforge.net/apps/mediawiki/dunelegacy/
+* Dune Dynasty, C, http://dunedynasty.sourceforge.net/
 
 ### Usage
+
+#### Setup
 
 ```bash
 virtualenv .
@@ -43,5 +45,13 @@ Files are extracted to _tmp/_ in PNG format
 ```
 
 ### Dependencies
-* pyglet - display, events, etc.
 * pil and pyx - image manipulation
+* pyglet - for display handling, events, etc.
+
+## Thanks
+Most of the extractors format code is based on work done by amazing peoples who reverse engineered and documented original Dune 2 binary / file formats.
+Here are resources I've been using while implementing yad2.
+* https://github.com/ultraq/redhorizon/ by @ultraq
+* https://github.com/OpenDUNE/OpenDUNE by @OpenDUNE team
+* http://dune2.ben.savoch.net/ by Ben Owen
+* http://vladan.bato.net/cnc/ccfiles4.txt by Vladan Bato 
