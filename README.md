@@ -11,6 +11,8 @@ For a real Dune 2 experience (more or *less* true to the original, and/or abando
 
 ### Usage
 
+#### Setup
+
 ```bash
 virtualenv .
 source bin/activate
@@ -43,5 +45,5 @@ Files are extracted to _tmp/_ in PNG format
 ```
 
 ### Dependencies
-* pyglet - display, events, etc.
 * pil and pyx - image manipulation
+* pyglet - for display handling, events, etc.
