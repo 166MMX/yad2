@@ -15,19 +15,19 @@ class Sprite:
         self.image = self.image.convert('RGB').point(lambda p: p * 4.0)
         True
 
-    def zoom(self, factor = 1):
+    def zoom(self, factor = 2):
         self.image = self.image.resize((self.image.size[0]*factor,self.image.size[1]*factor))
 
-    def write(self, outname='', drr=''):
-        if drr != '':
+    def write(self, outname='', dir=''):
+        if dir != '':
             try:
-                os.makedirs('tmp/' + drr)    
+                os.makedirs('tmp/' + dir)    
             except:
                 pass
             finally:
-                drr += "/"
+                dir += "/"
         if outname == '':
             outname = str(hashlib.md5(str(self.image)).hexdigest())
         outname += ".png"
-        self.logger.debug("save tmp/%s%s" % (drr, outname))
-        self.image.save("tmp/" + drr + outname, format= 'PNG')
+        self.logger.debug("save tmp/%s%s" % (dir, outname))
+        self.image.save("tmp/" + dir + outname, format= 'PNG')

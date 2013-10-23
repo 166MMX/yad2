@@ -8,9 +8,9 @@ import sys
 import math
 from construct import *
 from pyx import *
-from format80 import Format80
 from pal import Pal
-from sprite import Sprite
+from yad2.encoders import Format80
+from yad2.utils import Sprite
 
 class Cps:
 
@@ -37,7 +37,7 @@ class Cps:
             image.putpixel((index%320, int(math.floor(index/320.0))), color)
 
         s = Sprite(image)
-        s.write(drr = 'cps', outname = os.path.splitext(os.path.basename(self.filename))[0].lower())
+        s.write(dir = 'cps', outname = os.path.splitext(os.path.basename(self.filename))[0].lower())
 
         f.close()
         return True

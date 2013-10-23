@@ -5,8 +5,7 @@ import io
 import sys
 import traceback
 import logging
-
-from bytebuffer import ByteBuffer
+from yad2.utils.bytebuffer import ByteBuffer
 
 def xors(s1,s2):    
     bd = bytearray()

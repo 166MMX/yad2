@@ -4,7 +4,7 @@ import io
 import sys
 import traceback
 import logging
-from bytebuffer import ByteBuffer
+from yad2.utils.bytebuffer import ByteBuffer
 
 class Format80:
 

@@ -4,10 +4,9 @@ import sys
 import Image
 import random
 import logging
-from sprite import Sprite
 from pal import Pal
-from format80 import Format80
-from format40 import Format40
+from yad2.utils import Sprite
+from yad2.encoders import Format40, Format80
 
 class Wsa:
 
@@ -51,7 +50,7 @@ class Wsa:
                 image.putpixel((index%width, int(index/width)), color)
 
             s = Sprite(image)
-            s.write(outname = str(i), drr = "wsa/%s" % os.path.splitext(os.path.basename(self.filename))[0].lower())
+            s.write(outname = str(i), dir = "wsa/%s" % os.path.splitext(os.path.basename(self.filename))[0].lower())
             base = points
 
         self.logger.debug("offsets " + str(offsets))

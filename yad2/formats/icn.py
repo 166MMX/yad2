@@ -5,8 +5,8 @@ import logging
 from array import array
 import Image
 import io
-from sprite import Sprite
 from pal import Pal
+from yad2.utils import Sprite
 
 group_names = ["ICM_ICONGROUP_ROCK_CRATERS",
 "ICM_ICONGROUP_SAND_CRATERS",
@@ -233,4 +233,4 @@ class Icn:
                 image.putpixel((index%self.width, index/self.width), pixel)
           
             image = image.resize((self.width*2, self.height), Image.ANTIALIAS)
-            Sprite(image).write(outname="%d" % i, drr="icn/%s_%s" % ("{0:02d}".format(gid+1), group_names[gid]))
+            Sprite(image).write(outname="%d" % i, dir="icn/%s_%s" % ("{0:02d}".format(gid+1), group_names[gid]))
