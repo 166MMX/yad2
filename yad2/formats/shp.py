@@ -31,11 +31,10 @@ class Shp:
         
         class Data:
             
-            def __init__(self, header, data, palette):
+            def __init__(self, header, data):
                 self.logger = logging.getLogger('root')
                 self.header = header
                 self.data = io.BytesIO(data)
-                self.palette = palette
                 self.houseID=0
         
             def decode(self):
@@ -58,21 +57,19 @@ class Shp:
                     data = Format80(data).decode()
                 points = Format2(data).decode()
         
-                image = Image.new("L", (self.header.width, self.header.height), 255)
-                image.putpalette(self.palette)
+                sprite = Sprite(self.header.width, self.header.height)
                 for index, pixel in enumerate(points):
                     color = struct.unpack('B', pixel)[0]
                     if index > self.header.width*self.header.height -1: break
                     if len(lookup_table) > 0:
                         color = lookup_table[color] + self.houseID
-                    image.putpixel((index%self.header.width, int(index/self.header.width)), color)
-                return image
+                    sprite.putpixel(index%self.header.width, int(index/self.header.width), color)
+                return sprite
 
     def __init__(self, filename):
         self.logger = logging.getLogger('root')
         self.filename = filename
         self.filesize = os.path.getsize(self.filename)
-        self.palette = Pal(filename="output/IBM.PAL").read()
         self.offset = 2
         with open(self.filename, "rb") as f:
             f.seek(4)
@@ -99,7 +96,7 @@ class Shp:
                 length = self.chunks[i+1]-self.chunks[i]
                 f.seek(self.chunks[i])
                 head = Shp.Chunk.Header(f.read(10))
-                data = Shp.Chunk.Data(head, f.read(head.filesize), self.palette)
+                data = Shp.Chunk.Data(head, f.read(head.filesize))
                 images.append((str(i), data.decode()))
         
         self.logger.info("Images extracted %d" % len(images))

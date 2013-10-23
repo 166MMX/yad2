@@ -7,7 +7,7 @@ import logging
 from yad2 import Sprite
 
 parser = argparse.ArgumentParser(description='Dune 2')
-parser.add_argument('--type', required=True, help = "shp, pak, pal, wsa, cps, icn")
+parser.add_argument('--type', required=True, help = "shp, pak, wsa, cps, icn")
 parser.add_argument('--file', required=True, help = "'all' or filename")
 parser.add_argument('--debug', dest='debug',action='store_true')
 parser.set_defaults(debug=False)
@@ -22,23 +22,24 @@ if args.debug:
     logger.setLevel(logging.DEBUG)
 logger.addHandler(handler)
 
-def process(type, file):
-    obj = type.capitalize()
-    if file == "all":
-        files = glob.glob("output/*." + type.upper()) + glob.glob("assets/*." + type.upper())
-        for ff in files:
-            logger.info(ff)
-            p = globals()[obj](ff)
-            p.extract()
-    else:
-        p = globals()[obj](args.file)
-        p.extract()
-    
-if args.type == 'icn':
-    i = Icn.Extractor()
-    i.writeall()
-elif args.type == 'shp':
-    for name, image in Shp(args.file).extract():
-        Sprite(image).write(dir = "shp/%s" % os.path.splitext(os.path.basename(args.file))[0].lower(), outname = name)
+if args.file == "all":
+    files = glob.glob("output/*." + args.type.upper()) + glob.glob("assets/*." + args.type.upper())
 else:
-    process(args.type, args.file)
+    files = [args.file]
+
+for file in files:
+    logger.info(file)
+    if args.type == 'icn':
+        i = Icn.Extractor()
+        i.writeall()
+    elif args.type == 'pak':    
+        p = Pak(file)
+        p.extract()
+    elif args.type == 'shp' or args.type == 'cps' or args.type == 'wsa':
+        obj = args.type.capitalize()
+        for name, sprite in globals()[obj](file).extract():
+            sprite.zoom()
+            sprite.brigthness()
+#            sprite.fraction(1)
+            dir = os.path.splitext(os.path.basename(file))[0].lower()
+            sprite.write(dir = "%s/%s" % (args.type, dir), outname = name)

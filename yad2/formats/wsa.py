@@ -4,7 +4,6 @@ import sys
 import Image
 import random
 import logging
-from pal import Pal
 from yad2.utils import Sprite
 from yad2.encoders import Format40, Format80
 
@@ -29,9 +28,9 @@ class Wsa:
         for i in range(0,numframes+2):
             offsets.append(struct.unpack('I', f.read(4))[0])
 
-        self.palette = Pal(filename="output/IBM.PAL").read()
         base = "".join(chr(x) for x in [0] * (width*height))
 
+        images = []
         for i in range(0, len(offsets)-2):
             length = int(offsets[i+1] - offsets[i])
             f.seek(offsets[i])
@@ -40,19 +39,17 @@ class Wsa:
             stage1 = Format80(data).decode()
             points = Format40(base, stage1).decode()
 
-            image = Image.new("L", (width, height), 255)
-            image.putpalette(self.palette)
-
+            image = Sprite(width, height)
             for index, pixel in enumerate(points):
                 if index > width*height-1:
                     break
                 color = struct.unpack('B', pixel)[0]
-                image.putpixel((index%width, int(index/width)), color)
+                image.putpixel(index%width, int(index/width), color)
 
-            s = Sprite(image)
-            s.write(outname = str(i), dir = "wsa/%s" % os.path.splitext(os.path.basename(self.filename))[0].lower())
+            images.append((str(i), image))
             base = points
 
         self.logger.debug("offsets " + str(offsets))
 
         f.close()
+        return images

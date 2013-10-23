@@ -4,6 +4,7 @@ images2gif==1.0.1
 PIL==1.1.7
 nose
 mock
+pylint
 PyX==0.12.1
 six==1.4.1
 wsgiref==0.1.2
