@@ -18,10 +18,12 @@ pip install -r requirements.txt
 ```
 
 ```bash
-mv Dune2.exe dune2.zip
-unzip dune2.zip -d assets
-rm assets/XTRE.PAK assets/ATRE.pak
-for i in WSA SHP CPS WSA INI PCS VOC PAL; do echo $i; mkdir output/$i; mv output/*.$i output/$i; done
+./unpack.sh
+```
+
+#### Engine
+```
+./run.py --config config.ini
 ```
 
 #### Extractors
@@ -36,7 +38,3 @@ for i in WSA SHP CPS WSA INI PCS VOC PAL; do echo $i; mkdir output/$i; mv output
 ./main.py --type icn --file all # map sprites
 ```
 
-#### Engine
-```
-./run.py --config config.ini
-```

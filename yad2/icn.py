@@ -202,7 +202,6 @@ class Icn:
         self.logger.debug("%0.02d, %s, len %d, data %s" % (gid+1, group_names[gid], len(group), str(group)))
 
         for i, spriteID in enumerate(group):
-            print i
             self.stream.seek(spriteID * self.width * self.height)
   
             points = []
@@ -235,5 +234,3 @@ class Icn:
           
             image = image.resize((self.width*2, self.height), Image.ANTIALIAS)
             Sprite(image).write(outname="%d" % i, drr="icn/%s_%s" % ("{0:02d}".format(gid+1), group_names[gid]))
-            #Sprite(image).write(outname="%d_%s" %(i, "{0:02d}".format(spriteID)), drr="icn/%s_%s" % ("{0:02d}".format(gid+1), group_names[gid]))
-        
