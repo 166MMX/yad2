@@ -11,7 +11,7 @@ For a complete Dune 2 experience (more or less true to the original) see them pr
 * Dune Legacy, C++, http://sourceforge.net/apps/mediawiki/dunelegacy/
 * Dune Dynasty, C, http://dunedynasty.sourceforge.net/
 
-or just use original 1992 binary with DOSBox http://www.dosbox.com/wiki/GAMES:Dune_2
+or just use the original 1992 binary with DOSBox http://www.dosbox.com/wiki/GAMES:Dune_2
 
 ### Usage
 
