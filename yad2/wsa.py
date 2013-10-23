@@ -9,8 +9,6 @@ from pal import Pal
 from format80 import Format80
 from format40 import Format40
 
-#http://dune2.ben.savoch.net/formats/wsa/
-
 class Wsa:
 
     def __init__(self, filename):

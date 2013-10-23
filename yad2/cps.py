@@ -6,14 +6,11 @@ import random
 import io
 import sys
 import math
-
 from construct import *
 from pyx import *
 from format80 import Format80
 from pal import Pal
 from sprite import Sprite
-
-#http://dune2.ben.savoch.net/formats/cps/
 
 class Cps:
 

@@ -2,8 +2,6 @@ import struct
 import os
 import io
 
-#http://dune2.ben.savoch.net/formats/pal/
-
 class Pal:
 
     def __init__(self, **kwargs):

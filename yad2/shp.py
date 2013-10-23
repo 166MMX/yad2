@@ -8,17 +8,12 @@ import io
 import hashlib 
 import sys
 import logging
-
 from construct import *
 from pyx import *
-
 from format2 import Format2
 from format80 import Format80
 from pal import Pal
 from sprite import Sprite
-
-#https://github.com/chrisforbes/OpenRA/blob/master/doc/shp%20dune%202.txt
-#https://github.com/OpenRA/OpenRA/wiki/Dune-2-SHP-specification
 
 class Shp:
 

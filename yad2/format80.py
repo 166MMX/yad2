@@ -1,15 +1,10 @@
-#!/usr/bin/env python
 import struct
 import os
 import io
 import sys
 import traceback
 import logging
-
 from bytebuffer import ByteBuffer
-
-#http://eob.wikispaces.com/Format+80
-#https://github.com/ultraq/redhorizon/blob/3661d8fc36c37a6b97ee4754dc19e0534291d46d/Projects/Red%20Horizon%20-%20Filetypes/Java/redhorizon/utilities/codecs/Format80.java
 
 class Format80:
 

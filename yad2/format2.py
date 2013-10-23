@@ -4,11 +4,6 @@ import io
 import sys
 import logging
 
-#http://eob.wikispaces.com/Format+2
-#https://github.com/chrisforbes/OpenRA/blob/master/OpenRA.FileFormats/FileFormats/Format2.cs
-#https://subversion.assembla.com/svn/adige/trunk/Formats/SHP0.cs
-#https://github.com/ultraq/redhorizon/blob/master/Projects/Red%20Horizon%20-%20Filetypes/Java/redhorizon/utilities/codecs/Format2.java
-
 class Format2:
     
     def __init__(self, st):
