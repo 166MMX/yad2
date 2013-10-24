@@ -29,13 +29,10 @@ else:
 
 for file in files:
     logger.info(file)
-    if args.type == 'icn':
-        i = Icn.Extractor()
-        i.writeall()
-    elif args.type == 'pak':    
+    if args.type == 'pak':    
         p = Pak(file)
         p.extract()
-    elif args.type == 'shp' or args.type == 'cps' or args.type == 'wsa':
+    elif args.type == 'shp' or args.type == 'cps' or args.type == 'wsa' or args.type == 'icn':
         obj = args.type.capitalize()
         for name, sprite in globals()[obj](file).extract():
             sprite.zoom()
