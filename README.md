@@ -1,5 +1,7 @@
 ## yad2 (Yet Another Dune 2)
 
+[![Build Status](https://secure.travis-ci.org/odcinek/yad2.png?branch=master)](http://travis-ci.org/odcinek/yad2)
+
 If you never heard about classic Westwood RTS Dune 2, see overly detailed description at http://dune.wikia.com/wiki/Dune_II_(video_game).
 
 The initial goal here was to play with python - proper testing, good practices, structuring codebase, etc. I'm (probably) not going to implement anything complete, like a working game engine. Most likely it will end up being just a bunch of PAK file extractors and such. 
