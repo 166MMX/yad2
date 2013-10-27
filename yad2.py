@@ -26,27 +26,36 @@ if args.debug:
 config = ConfigParser.ConfigParser()
 config.read(args.config)
 
-SIZE = config.getint('tile', 'size')
-SPACE = config.getint('tile', 'space')
-WIDTH = config.getint('window', 'width')
-HEIGHT = config.getint('window', 'height')
+TILE_SIZE = config.getint('tile', 'size')
+TILE_SPACE = config.getint('tile', 'space')
+WINDOW_WIDTH = config.getint('window', 'width')
+WINDOW_HEIGHT = config.getint('window', 'height')
+VIEWPORT_WIDTH = 300
+VIEWPORT_HEIGHT = 200
+
 SEED = config.getint('map', 'seed')
 
-SCALE=SIZE/16.0
-XTILES=int(WIDTH/SIZE)
-YTILES=int(HEIGHT/SIZE)
+TILE_SCALE=TILE_SIZE/16.0
+XTILES=int(VIEWPORT_WIDTH/TILE_SIZE)
+YTILES=int(VIEWPORT_HEIGHT/TILE_SIZE)
+
+pyglet.resource.path = ['tmp/']
+pyglet.resource.reindex()
 
 class Viewport:
 
-    def __init__(self, m, x=0, y=0):
+    def __init__(self, m, x=0, y=0, posx=0, posy=0):
         self.logger = logging.getLogger('root')
         self.x = x
         self.y = y
-        self.w = XTILES
-        self.h = YTILES
+        self.w = int(self.x/TILE_SIZE)
+        self.h = int(self.y/TILE_SIZE)
         self.source = m.read()
+        self.tiles = []
+        for i in range (0,81):
+            self.tiles.append(pyglet.resource.image("icn/icon/ICM_ICONGROUP_LANDSCAPE/%d.png" % i))
 
-    def update(self, x, y):
+    def move(self, x, y):
         if self.x + x < 0: x = 0
         if self.x + XTILES + x > 64: x = 0
         if self.y + y < 0: y = 0
@@ -61,9 +70,9 @@ class Viewport:
                 g.append(self.source[64*xx+yy])
             d.append(g)
         result = []
-        for i in range(self.x, self.x + XTILES):
+        for i in range(self.w, self.w + XTILES):
             g = []
-            for j in xrange(self.y, self.y + YTILES):
+            for j in xrange(self.w, self.w + YTILES):
                 g.append(d[j][i])
             result.append(g)
 
@@ -79,6 +88,14 @@ class Viewport:
                 x+=1
             y+=1
 
+    def draw(self,xx,yy,x,y):
+        sprites = []
+        for x,y,v in self.move(x,y).points():
+            sprites.append(pyglet.sprite.Sprite(self.tiles[v],x=x*TILE_SIZE+x*TILE_SPACE, y=VIEWPORT_HEIGHT-(y*TILE_SIZE+y*TILE_SPACE+TILE_SIZE)))
+        for sprite in sprites:
+            sprite.scale = TILE_SCALE
+            sprite.draw()
+
 class App:
 
     def __init__(self):
@@ -86,25 +103,13 @@ class App:
         self.m = Map(SEED)
         self.x = 0
         self.y = 0
-        self.viewport = Viewport(self.m, 0,0)
+        self.viewport = Viewport(self.m, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 60, 80)
+        self.interface = Interface()
 
     def refresh(self, x=0, y=0):
-        sprites = []
-
-        for x,y,v in self.viewport.update(x,y).points():
-            sprites.append(pyglet.sprite.Sprite(self.tiles[v],x=x*SIZE+x*SPACE, y=HEIGHT-(y*SIZE+y*SPACE+SIZE)))
-
         window.clear()
-        for sprite in sprites:
-            sprite.scale = SCALE
-            sprite.draw()
-
-    def load(self):
-        pyglet.resource.path = ['tmp/icn/09_ICM_ICONGROUP_LANDSCAPE/']
-        pyglet.resource.reindex()
-        self.tiles = []
-        for i in range (0,81):
-            self.tiles.append(pyglet.resource.image("%d.png" % i))
+        self.interface.draw(0,0)
+        self.viewport.draw(60,60,x,y)
 
 class EventLoop(pyglet.app.EventLoop):
 
@@ -123,10 +128,10 @@ class Window(pyglet.window.Window):
 
     def __init__(self, width, height):
         super(Window, self).__init__(vsync = True, width=width, height=height)
-        #pyglet.clock.schedule_interval(self.update, 1.0/128.0)
+        #pyglet.clock.schedule_interval(self.move, 1.0/128.0)
         pyglet.clock.set_fps_limit(32)
 
-    def update(self, dt):
+    def move(self, dt):
         pass
 
     def on_draw(self):
@@ -148,11 +153,22 @@ class Window(pyglet.window.Window):
         elif symbol == key.ESCAPE:
             window.close()
             el.exit()
+
+class Interface:
+
+    def __init__(self):
+        pass
+
+    def draw(self, x,y):
+        iface = pyglet.resource.image("cps/screen/0.png")
+        s=pyglet.sprite.Sprite(iface, x=0, y=0)
+        s.scale = 3
+        s.draw()
+
     
 #fps = pyglet.clock.ClockDisplay()
-window = Window(WIDTH, HEIGHT)
+window = Window(WINDOW_WIDTH, WINDOW_HEIGHT)
 
 app = App()
-app.load()
 el = EventLoop()
 el.run()
