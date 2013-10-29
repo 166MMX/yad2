@@ -6,6 +6,7 @@ import sys
 import traceback
 import logging
 
+
 class ByteBuffer:
 
     def __init__(self, stream):
@@ -20,7 +21,7 @@ class ByteBuffer:
         self.stream.seek(0)
         res = self.stream.read()
         self.stream.seek(0)
-        return res 
+        return res
 
     def getShort(self):
         self.counter += 2
@@ -34,7 +35,7 @@ class ByteBuffer:
             cur = int(self.stream.tell())
             if cur + position < 0:
                 position = 0
-            
+
             self.stream.seek(position)
             x = self.stream.read(1)
             self.stream.seek(cur)

@@ -4,8 +4,9 @@ import io
 import sys
 import logging
 
+
 class Format2:
-    
+
     def __init__(self, st):
         self.logger = logging.getLogger('root')
         self.st = io.BytesIO(st)

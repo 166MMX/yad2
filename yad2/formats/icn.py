@@ -241,7 +241,8 @@ class Icn:
             for index, pixel in enumerate(colorized_points):
                 image.putpixel(index % self.width, index / self.width, pixel)
 
-            if self.width != self.height: image.stretch(max(self.width, self.height))
+            if self.width != self.height:
+                image.stretch(max(self.width, self.height))
 
             images.append(("%s/%s" % (group_names[gid], i), image))
 
