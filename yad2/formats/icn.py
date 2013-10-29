@@ -5,7 +5,7 @@ import logging
 from array import array
 import Image
 import io
-from pal import Pal
+from yad2.utils import Pal
 from yad2.utils import Sprite
 
 group_names = ["ICM_ICONGROUP_ROCK_CRATERS",

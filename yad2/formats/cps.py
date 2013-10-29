@@ -8,7 +8,7 @@ import sys
 import math
 from construct import *
 from pyx import *
-from pal import Pal
+from yad2.utils import Pal
 from yad2.encoders import Format80
 from yad2.utils import Sprite
 
