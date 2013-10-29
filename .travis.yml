@@ -9,4 +9,4 @@ env:
 install:
   - pip install tox --use-mirrors
 script:
-  - tox -e $TOX_ENV
+  - tox
